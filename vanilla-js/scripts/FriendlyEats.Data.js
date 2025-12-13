@@ -19,12 +19,20 @@ FriendlyEats.prototype.addRestaurant = function(data) {
   /*
     TODO: Implement adding a document
   */
+  var collection = firebase.firestore().collection('restaurants');
+    return collection.add(data);
 };
 
 FriendlyEats.prototype.getAllRestaurants = function(renderer) {
   /*
     TODO: Retrieve list of restaurants
   */
+  var query = firebase.firestore()
+        .collection('restaurants')
+        .orderBy('avgRating', 'desc')
+        .limit(50);
+
+    this.getDocumentsInQuery(query, renderer);
 };
 
 FriendlyEats.prototype.getDocumentsInQuery = function(query, renderer) {
